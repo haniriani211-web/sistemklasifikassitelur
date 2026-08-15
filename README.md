@@ -1,7 +1,7 @@
 # Sistem Klasifikasi Kelayakan Kualitas Telur (Algoritma C4.5)
 **Peternakan Ayam Petelur Rajadesa Berdasarkan Karakteristik Fisik**
 
-Aplikasi sistem informasi & pendukung keputusan berbasis web menggunakan **Laravel 13 (PHP 8.3)** dan **MySQL** yang mengimplementasikan **Algoritma C4.5 (Decision Tree)** untuk mengklasifikasikan kualitas telur (*Layak Jual* vs *Tidak Layak Jual*) berdasarkan parameter fisik:
+Aplikasi sistem informasi & pendukung keputusan berbasis web menggunakan **Laravel (PHP 8.2+)** dan **MySQL** yang mengimplementasikan **Algoritma C4.5 (Decision Tree)** untuk mengklasifikasikan kualitas telur (*Layak Jual* vs *Tidak Layak Jual*) berdasarkan parameter fisik:
 1. **Berat Telur (Gram)**
 2. **Diameter Telur (Cm)**
 3. **Kondisi Cangkang** (*Normal* / *Retak*)
@@ -23,7 +23,7 @@ Aplikasi sistem informasi & pendukung keputusan berbasis web menggunakan **Larav
 
 ---
 
-## 🚀 Panduan Instalasi & Jalankan Aplikasi (Untuk Client)
+## 🚀 Panduan Instalasi & Jalankan Aplikasi (Untuk Client / XAMPP)
 
 Berikut langkah mudah bagi client/pengguna untuk mengunduh (*clone*) dan menjalankan aplikasi di komputer/laptop lokal:
 
@@ -35,8 +35,9 @@ cd sistemklasifikassitelur
 ```
 
 ### 2. **Install Dependensi PHP (Composer)**
+Jalankan perintah berikut agar Composer mengabaikan perbedaan versi PHP pada XAMPP:
 ```bash
-composer install
+composer install --ignore-platform-reqs
 ```
 
 ### 3. **Buat File Konfigurasi Environment (`.env`)**
