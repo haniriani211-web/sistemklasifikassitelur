@@ -1,58 +1,93 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistem Klasifikasi Kelayakan Kualitas Telur (Algoritma C4.5)
+**Peternakan Ayam Petelur Rajadesa Berdasarkan Karakteristik Fisik**
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi sistem informasi & pendukung keputusan berbasis web menggunakan **Laravel 13 (PHP 8.3)** dan **MySQL** yang mengimplementasikan **Algoritma C4.5 (Decision Tree)** untuk mengklasifikasikan kualitas telur (*Layak Jual* vs *Tidak Layak Jual*) berdasarkan parameter fisik:
+1. **Berat Telur (Gram)**
+2. **Diameter Telur (Cm)**
+3. **Kondisi Cangkang** (*Normal* / *Retak*)
+4. **Warna Cangkang** (*Cokelat Tua* / *Cokelat Muda*)
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🛠️ Fitur Utama Sistem
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1. **Multi-Role Authentication**:
+   - **Administrasi (Admin)**: Akses Dashboard, Manajemen Dataset Latih, Perhitungan C4.5 (*Entropy*, *Gain*, *Tree*, *Confusion Matrix* 100% Presisi), Rekapitulasi & Cetak Laporan PDF, serta Kelola User.
+   - **Pekerja Kandang**: Input Pemanenan Telur (Prediksi C4.5 Instan) & Riwayat Panen.
+2. **Transparansi Perhitungan Algoritma C4.5**:
+   - Menampilkan detail step-by-step perhitungan matematik C4.5 sesuai spreadsheet `RUMUS C4.5.xlsx`.
+   - Menentukan Root Node (`Berat Telur` &le; 53.0 Gram, Gain = 0.881291).
+   - Evaluasi Confusion Matrix dengan Akurasi **100%**.
+3. **Desain Light Mode Ceria**:
+   - Antarmuka terang dengan warna *warm egg-yolk* & ikon telur animasi.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🚀 Panduan Instalasi & Jalankan Aplikasi (Untuk Client / Pengguna)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Ikuti langkah-langkah berikut untuk mengunduh (*clone*) dan menjalankan aplikasi di komputer/laptop lokal:
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
+### 1. **Clone Repository dari GitHub**
+Buka terminal / Command Prompt / Git Bash, lalu jalankan:
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone <URL_REPOSITORY_GITHUB_ANDA>
+cd sistem-c45
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 2. **Install Dependensi PHP (Composer)**
+```bash
+composer install
+```
 
-## Contributing
+### 3. **Buat File Konfigurasi Environment (`.env`)**
+Salin file `.env.example` menjadi `.env`:
+- **Windows (Command Prompt / PowerShell)**:
+  ```cmd
+  copy .env.example .env
+  ```
+- **Git Bash / Linux / Mac**:
+  ```bash
+  cp .env.example .env
+  ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 4. **Generate Application Key**
+```bash
+php artisan key:generate
+```
 
-## Code of Conduct
+### 5. **Konfigurasi Database & Migration**
+1. Pastikan Service MySQL (XAMPP / Laragon / MySQL Server) sudah aktif.
+2. Buat database baru di MySQL dengan nama `sistem_c45` (melalui phpMyAdmin / MySQL CLI).
+3. Sesuaikan file `.env` jika username/password database berbeda:
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=sistem_c45
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
+4. Jalankan perintah migration dan seeder dataset awal (20 sampel dari `RUMUS C4.5.xlsx`):
+   ```bash
+   php artisan migrate:fresh --seed
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 6. **Jalankan Web Server Lokal**
+```bash
+php artisan serve
+```
+Akses aplikasi melalui browser di: **`http://127.0.0.1:8000`**
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🔑 Akun Bawaan (Default Credentials)
 
-## License
+| Role | Email | Password |
+| :--- | :--- | :--- |
+| **Administrasi (Admin)** | `admin@rajadesa.com` | `password` |
+| **Pekerja Kandang** | `pekerja@rajadesa.com` | `password` |
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## 📂 Berkas Riset & Spreadsheet
+Data latih & formula perhitungan C4.5 dapat diperiksa pada file `RUMUS C4.5.xlsx` di direktori utama proyek.
