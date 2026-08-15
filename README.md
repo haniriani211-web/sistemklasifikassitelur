@@ -23,15 +23,15 @@ Aplikasi sistem informasi & pendukung keputusan berbasis web menggunakan **Larav
 
 ---
 
-## 🚀 Panduan Instalasi & Jalankan Aplikasi (Untuk Client / Pengguna)
+## 🚀 Panduan Instalasi & Jalankan Aplikasi (Untuk Client)
 
-Ikuti langkah-langkah berikut untuk mengunduh (*clone*) dan menjalankan aplikasi di komputer/laptop lokal:
+Berikut langkah mudah bagi client/pengguna untuk mengunduh (*clone*) dan menjalankan aplikasi di komputer/laptop lokal:
 
 ### 1. **Clone Repository dari GitHub**
 Buka terminal / Command Prompt / Git Bash, lalu jalankan:
 ```bash
-git clone <URL_REPOSITORY_GITHUB_ANDA>
-cd sistem-c45
+git clone https://github.com/haniriani211-web/sistemklasifikassitelur.git
+cd sistemklasifikassitelur
 ```
 
 ### 2. **Install Dependensi PHP (Composer)**
